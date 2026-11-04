@@ -1,0 +1,13 @@
+node_modules/
+dist/
+output/
+.playwright-cli/
+runtime/
+design/
+.figma-bridge.json
+**/.figma-bridge.json
+*.zip
+*.sha256
+.env
+.env.*
+*.log

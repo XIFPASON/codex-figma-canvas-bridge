@@ -1,0 +1,21 @@
+import {readFile,readdir,writeFile,mkdir} from 'node:fs/promises';
+import path from 'node:path';
+import {zipSync,unzipSync} from 'fflate';
+import {createHash} from 'node:crypto';
+const root='Design-Handoff-Exporter-Community-Candidate';
+const files={};
+async function add(dir,dest){for(const entry of await readdir(dir,{withFileTypes:true})){const full=path.join(dir,entry.name),name=`${dest}/${entry.name}`;if(entry.isDirectory())await add(full,name);else files[`${root}/${name}`]=new Uint8Array(await readFile(full));}}
+await add('output/community','plugin');
+await add('publishing','publishing');
+await add('skill/figma-export-to-code','skill/figma-export-to-code');
+files[`${root}/START-HERE.txt`]=new TextEncoder().encode('Community submission candidate, NOT published. Read publishing/SUBMISSION.md. Plugin manifest requires your Figma-assigned ID before publishing. Local receiver is intentionally excluded. Publishing metadata and privacy policy are drafts requiring publisher contact information.\n');
+const ui=await readFile('output/community/ui.html','utf8');
+const manifest=JSON.parse(await readFile('output/community/manifest.json','utf8'));
+if(JSON.stringify(manifest.networkAccess)!==JSON.stringify({allowedDomains:['none']}))throw Error('Community build must be offline');
+if(/\bfetch\s*\(/.test(ui)||ui.includes('localhost:3847'))throw Error('Local sync found in offline UI');
+const zip=zipSync(files,{level:6}),restored=unzipSync(zip);
+for(const [name,data]of Object.entries(files))if(!Buffer.from(data).equals(Buffer.from(restored[name])))throw Error('Archive mismatch');
+await mkdir('output/releases',{recursive:true});
+const output=`output/releases/${root}.zip`;await writeFile(output,zip);
+await writeFile(`${output}.sha256`,createHash('sha256').update(zip).digest('hex')+'\n');
+console.log(JSON.stringify({archive:path.resolve(output),bytes:zip.length,files:Object.keys(files).length,hasFigmaAssignedId:Boolean(manifest.id)},null,2));

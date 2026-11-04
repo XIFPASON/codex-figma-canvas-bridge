@@ -1,0 +1,36 @@
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from pathlib import Path
+
+output = Path('publishing/assets')
+output.mkdir(parents=True, exist_ok=True)
+icon = Image.new('RGB', (512, 512), '#202127')
+d = ImageDraw.Draw(icon)
+d.line([(256, 112), (256, 306)], fill='white', width=27)
+d.line([(178, 237), (256, 315), (334, 237)], fill='white', width=27, joint='curve')
+d.line([(133, 328), (133, 388), (379, 388), (379, 328)], fill='white', width=22, joint='curve')
+icon.save(output / 'icon-512.png')
+icon.resize((128,128), Image.Resampling.LANCZOS).save(output / 'icon-128.png')
+
+cover = Image.new('RGB', (1920,1080), '#f3f4f6')
+d = ImageDraw.Draw(cover)
+regular = 'C:/Windows/Fonts/segoeui.ttf'
+bold = 'C:/Windows/Fonts/segoeuib.ttf'
+font = lambda size, weight=False: ImageFont.truetype(bold if weight else regular, size)
+cover.paste(icon.resize((96,96), Image.Resampling.LANCZOS), (126,126))
+d.text((126,268), 'Design Handoff\nExporter', font=font(91,True), fill='#202127', spacing=0)
+d.text((130,528), 'Your design. One offline file.', font=font(35), fill='#60616b')
+d.text((130,624), 'Layers  /  Layout  /  Text\nPreviews  /  SVG  /  Images', font=font(30), fill='#202127', spacing=18)
+d.line([(130,782),(810,782)],fill='#d9dade',width=2)
+d.text((130,822), 'Read-only. No account. No local server.', font=font(26),fill='#60616b')
+ui = Image.open(output / 'plugin-ui.png').convert('RGB')
+ui = ui.resize((484,770),Image.Resampling.LANCZOS)
+shadow=Image.new('RGBA',cover.size,(0,0,0,0))
+sd=ImageDraw.Draw(shadow)
+sd.rounded_rectangle((1190,138,1674,908),radius=18,fill=(28,30,40,48))
+shadow=shadow.filter(ImageFilter.GaussianBlur(30))
+cover=Image.alpha_composite(cover.convert('RGBA'),shadow)
+mask=Image.new('L',ui.size,0)
+ImageDraw.Draw(mask).rounded_rectangle((0,0,483,769),radius=16,fill=255)
+cover.paste(ui,(1190,126),mask)
+cover.convert('RGB').save(output / 'cover-1920x1080.png')
+print('Created icon and cover images')
