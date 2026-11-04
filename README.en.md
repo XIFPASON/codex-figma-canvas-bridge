@@ -1,5 +1,7 @@
 # Codex Canvas Bridge
 
+![Codex Canvas Bridge: local-first Figma canvas automation](docs/images/hero.png)
+
 [中文说明](README.md)
 
 A local bridge that lets Codex read and edit your current Figma canvas through a desktop plugin. Create frames, text and components, adjust layouts and styles, import SVGs and images, and capture screenshots without configuring the official Figma MCP.
@@ -7,6 +9,8 @@ A local bridge that lets Codex read and edit your current Figma canvas through a
 **Source available for noncommercial use only.** This project uses the [PolyForm Noncommercial License 1.0.0](LICENSE). It is not an OSI-approved open-source license. Commercial use is not granted. Third-party components retain their original licenses; see [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ## Features
+
+![Inspect, create, refine and export Figma designs](docs/images/capabilities.png)
 
 - Read the current page, selection, layer properties and styled text segments.
 - Create frames, components, text, rectangles, ellipses and SVG nodes.
@@ -17,6 +21,8 @@ A local bridge that lets Codex read and edit your current Figma canvas through a
 Commands are structured operations, not arbitrary JavaScript. There is no delete operation. Writes are not transactional: failures may leave partial changes. Timed-out writes are not automatically replayed.
 
 ## Quick start on Windows
+
+![Workflow: Codex and Skill, local receiver, Figma plugin and canvas](docs/images/workflow.png)
 
 Download the Windows x64 package from [Releases](https://github.com/XIFPASON/codex-figma-canvas-bridge/releases) and extract it completely. The package includes Node.js; no separate runtime installation is needed.
 

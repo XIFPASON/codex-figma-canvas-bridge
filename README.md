@@ -1,5 +1,7 @@
 # Codex Canvas Bridge（本地版）
 
+![Codex Canvas Bridge：本地读取与编辑 Figma 画布](docs/images/hero.png)
+
 [English introduction](README.en.md)
 
 **English:** A local bridge that lets Codex read and edit your current Figma canvas through a desktop plugin. Create frames, text and components, adjust layouts and styles, import SVGs and images, and capture screenshots without configuring the official Figma MCP. Source available for noncommercial use only.
@@ -10,6 +12,8 @@
 
 ## 功能
 
+![画布读取、创建、修改和导出能力概览](docs/images/capabilities.png)
+
 - 读取当前页面、选区、图层属性和混合文字样式。
 - 创建 Frame、文字、组件、矩形、椭圆和 SVG。
 - 修改颜色、字体、尺寸、位置、Auto Layout、圆角和阴影。
@@ -19,6 +23,8 @@
 使用结构化命令，不执行来自客户端的任意 JavaScript。没有删除接口。写命令并非事务，失败可能留下部分改动；超时不自动重放，以免重复创建。
 
 ## Windows 免安装包
+
+![工作流程：Codex 与 Skill、本地服务、Figma 插件及画布](docs/images/workflow.png)
 
 从本仓库 [Releases](https://github.com/XIFPASON/codex-figma-canvas-bridge/releases) 下载并完整解压 Windows x64 包，无需安装 Node.js。
 
