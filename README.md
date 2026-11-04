@@ -1,5 +1,9 @@
 # Codex Canvas Bridge（本地版）
 
+[English introduction](README.en.md)
+
+**English:** A local bridge that lets Codex read and edit your current Figma canvas through a desktop plugin. Create frames, text and components, adjust layouts and styles, import SVGs and images, and capture screenshots without configuring the official Figma MCP. Source available for noncommercial use only.
+
 通过本地插件，让 Codex 直接读取和编辑 Figma 当前页面。无需配置官方 Figma MCP，原有设计数据导出功能仍可使用。
 
 **源码公开，仅限非商业用途。** 本项目采用 [PolyForm Noncommercial License 1.0.0](LICENSE)，不是允许商业使用的 OSI 标准开源项目。商业使用不在本许可授权范围内；完整条款以 LICENSE 为准。第三方组件保留其各自许可，见 [THIRD_PARTY.md](THIRD_PARTY.md)。
